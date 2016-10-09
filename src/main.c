@@ -112,7 +112,7 @@ button=0;
   while (1)
   {
 	  lastbutton=button;
-	  	 	  a=((GPIOC->IDR)&(0b1<<13));
+	  	 	  a=GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_13);
 	  	 	 	  button=a!=0;
 
 	  	 	 	  if((!button) && lastbutton)
