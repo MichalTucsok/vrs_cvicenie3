@@ -106,11 +106,27 @@ int main(void)
 
   /* TODO - Add your application code here */
 
-
+pombutton=0;
   /* Infinite loop */
   while (1)
   {
 	  button = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_13);
+
+	  	  if (button==0)
+	  	  {
+	  		  pombutton++;
+	  		  if (pombutton % 2 == 0){
+	  		GPIO_SetBits(GPIOA, GPIO_Pin_5);
+	  		  delay(1000000);
+	  		  }
+	  		  else {
+	  			  GPIO_ResetBits(GPIOA, GPIO_Pin_5);
+	  		  delay(1000000);
+	  		  }
+	  	  }
+
+
+	  /* button = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_13);
 	  			if (button==0)
 	  			{
 	  				GPIO_SetBits(GPIOA, GPIO_Pin_5);
@@ -118,7 +134,7 @@ int main(void)
 	  			else
 	  			{
 	  				GPIO_ResetBits(GPIOA, GPIO_Pin_5);
-	  			}
+	  			}v*/
 
 	  /* GPIO_SetBits(GPIOA, GPIO_Pin_5);
 	  	  delay(1000000);
