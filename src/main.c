@@ -60,6 +60,13 @@ int main(void)
 
 	  GPIO_Init(GPIOA, &gpioInitStruc);
 
+	  GPIO_SetBits(GPIOA, GPIO_Pin_5);
+	  GPIO_ResetBits(GPIOA, GPIO_Pin_5);
+	  GPIO_WriteBit(GPIOA, GPIO_Pin_5,1);
+      GPIO_WriteBit(GPIOA, GPIO_Pin_5,0);
+      GPIO_ToggleBits(GPIOA, GPIO_Pin_5);
+      GPIO_ToggleBits(GPIOA, GPIO_Pin_5);
+
   /**
   *  IMPORTANT NOTE!
   *  See the <system_*.c> file and how/if the SystemInit() function updates 
