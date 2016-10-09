@@ -48,7 +48,11 @@ SOFTWARE.
 */
 int main(void)
 {
+	uint8_t button;
+	uint8_t pombutton;
+
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
+	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
 
 	GPIO_InitTypeDef gpioInitStruc;
 
@@ -66,6 +70,15 @@ int main(void)
       GPIO_WriteBit(GPIOA, GPIO_Pin_5,0);
       GPIO_ToggleBits(GPIOA, GPIO_Pin_5);
       GPIO_ToggleBits(GPIOA, GPIO_Pin_5);
+
+      GPIO_InitTypeDef gpioInitStrucbutton;
+
+       gpioInitStrucbutton.GPIO_Mode = GPIO_Mode_IN;
+       gpioInitStrucbutton.GPIO_OType = GPIO_OType_PP;
+       gpioInitStrucbutton.GPIO_Pin = GPIO_Pin_13;
+       gpioInitStrucbutton.GPIO_PuPd = GPIO_PuPd_NOPULL;
+
+       GPIO_Init(GPIOC, &gpioInitStrucbutton);
 
   /**
   *  IMPORTANT NOTE!
@@ -90,7 +103,7 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
-
+	  button = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_13);
   }
   return 0;
 }
