@@ -110,12 +110,21 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
-	 // button = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_13);
-	      GPIO_SetBits(GPIOA, GPIO_Pin_5);
+	  button = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_13);
+	  			if (button==0)
+	  			{
+	  				GPIO_SetBits(GPIOA, GPIO_Pin_5);
+	  			}
+	  			else
+	  			{
+	  				GPIO_ResetBits(GPIOA, GPIO_Pin_5);
+	  			}
+
+	  /* GPIO_SetBits(GPIOA, GPIO_Pin_5);
 	  	  delay(1000000);
 	  	  //vypni LED
 	  	  GPIO_ResetBits(GPIOA, GPIO_Pin_5);
-	  	  delay(1000000);
+	  	  delay(1000000); */
   }
   return 0;
 }
