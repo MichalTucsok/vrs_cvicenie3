@@ -55,8 +55,9 @@ void delay(uint32_t cas)
 */
 int main(void)
 {
-	uint8_t button;
+	uint8_t button, lastbutton;
 	uint8_t pombutton;
+	uint16_t a;
 
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
@@ -106,24 +107,22 @@ int main(void)
 
   /* TODO - Add your application code here */
 
-pombutton=0;
+button=0;
   /* Infinite loop */
   while (1)
   {
-	  button = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_13);
+	  lastbutton=button;
+	  	 	  a=((GPIOC->IDR)&(0b1<<13));
+	  	 	 	  button=a!=0;
 
-	  	  if (button==0)
-	  	  {
-	  		  pombutton++;
-	  		  if (pombutton % 2 == 0){
-	  		GPIO_SetBits(GPIOA, GPIO_Pin_5);
-	  		  delay(1000000);
-	  		  }
-	  		  else {
-	  			  GPIO_ResetBits(GPIOA, GPIO_Pin_5);
-	  		  delay(1000000);
-	  		  }
-	  	  }
+	  	 	 	  if((!button) && lastbutton)
+	  	 	 	  {
+	  	 	 		  delay(1000);
+	  	 	 		  if(!button)
+	  	 	 		  {
+	  	 	 			  GPIO_ToggleBits(GPIOA, GPIO_Pin_5);
+	  	 	 		  }
+	  	 	 	  }
 
 
 	  /* button = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_13);
